@@ -5,7 +5,7 @@ import PaymentMethod from './PaymentMethod.vue'
 </script>
 
 <template>
-  <section class=" max-w-sm mx-auto">
+  <section class="">
     <!--  -->
     <TotalTipAmount />
     <!--  -->
