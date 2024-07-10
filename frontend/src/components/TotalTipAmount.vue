@@ -1,4 +1,15 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { usePaymentStore } from '../store/payment';
+import { useUiStore } from '../store/ui';
+import { getFormattedNumber } from '../lib/utils';
+
+const usePayment = usePaymentStore()
+const useUi = useUiStore()
+
+const handleEditTip = () => {
+  useUi.setNumPadActive(true, 'total-tip')
+}
+</script>
 
 <template>
   <div class="flex gap-3 items-center  justify-center">
@@ -6,12 +17,14 @@
       <span class="text-sm leading-none absolute -top-5 left-0"
         >Total de propinas</span
       >
-      <span class="p-2 text-4xl font-semibold bg-primary/20 rounded-md"
-        >$1,828.00</span
+      <span
+        class="p-2 text-4xl font-semibold bg-primary/20 rounded-md min-w-[200px] text-end"
+        >$ {{ getFormattedNumber(usePayment.totalTip) }}</span
       >
     </div>
     <button
       class="grid place-items-center border h-full flex-none hover:bg-primary hover:text-white transition-all active:bg-primary/80 p-2 rounded-full duration-200"
+      @click="handleEditTip"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"

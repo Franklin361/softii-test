@@ -1,127 +1,10 @@
 <script setup lang="ts">
 
-const options: { label: string, typeIcon: 'cash' | 'card', value: number }[] = [
-  {
-    label: 'Efectivo',
-    typeIcon: 'cash',
-    value: 100
-  },
-  {
-    label: 'Efectivo',
-    typeIcon: 'cash',
-    value: 100
-  },
-  {
-    label: 'Efectivo',
-    typeIcon: 'cash',
-    value: 100
-  },
-  {
-    label: 'Efectivo',
-    typeIcon: 'cash',
-    value: 100
-  },
-  {
-    label: 'Efectivo',
-    typeIcon: 'cash',
-    value: 100
-  },
-  {
-    label: 'Efectivo',
-    typeIcon: 'cash',
-    value: 100
-  },
-  {
-    label: 'Efectivo',
-    typeIcon: 'cash',
-    value: 100
-  },
-  {
-    label: 'Efectivo',
-    typeIcon: 'cash',
-    value: 100
-  },
-  {
-    label: 'Efectivo',
-    typeIcon: 'cash',
-    value: 100
-  },
-  {
-    label: 'Efectivo',
-    typeIcon: 'cash',
-    value: 100
-  },
-  {
-    label: 'Efectivo',
-    typeIcon: 'cash',
-    value: 100
-  },
-  {
-    label: 'Efectivo',
-    typeIcon: 'cash',
-    value: 100
-  },
-  {
-    label: 'Efectivo',
-    typeIcon: 'cash',
-    value: 100
-  },
-  {
-    label: 'Efectivo',
-    typeIcon: 'cash',
-    value: 100
-  },
-  {
-    label: 'Efectivo',
-    typeIcon: 'cash',
-    value: 100
-  },
-  {
-    label: 'Efectivo',
-    typeIcon: 'cash',
-    value: 100
-  },
-  {
-    label: 'Efectivo',
-    typeIcon: 'cash',
-    value: 100
-  },
-  {
-    label: 'Efectivo',
-    typeIcon: 'cash',
-    value: 100
-  },
-  {
-    label: 'Efectivo',
-    typeIcon: 'cash',
-    value: 100
-  },
-  {
-    label: 'Efectivo',
-    typeIcon: 'cash',
-    value: 100
-  },
-  {
-    label: 'Efectivo',
-    typeIcon: 'cash',
-    value: 100
-  },
-  {
-    label: 'Efectivo',
-    typeIcon: 'cash',
-    value: 100
-  },
-  {
-    label: 'Efectivo',
-    typeIcon: 'cash',
-    value: 100
-  },
-  {
-    label: 'Efectivo',
-    typeIcon: 'cash',
-    value: 100
-  },
-]
+
+import { usePaymentStore } from '../store/payment';
+import { getFormattedNumber } from '../lib/utils';
+
+const usePayment = usePaymentStore()
 </script>
 
 <template>
@@ -132,8 +15,8 @@ const options: { label: string, typeIcon: 'cash' | 'card', value: number }[] = [
       >
       <div class="px-2">
         <div
-          v-if="options.length <=0"
-          class="border border-black/30 rounded-2xl shadow-lg shadow-black/20  px-5 py-4 hover:bg-primary/90 hover:text-white cursor-pointer active:bg-primary transition-all duration-200 bg-white text-sm font-semibold "
+          v-if="usePayment.paymentList.length <=0"
+          class="border border-black/30 rounded-2xl shadow-lg shadow-black/20  px-5 py-4  bg-white text-sm font-semibold "
         >
           Sin pagos
         </div>
@@ -143,14 +26,14 @@ const options: { label: string, typeIcon: 'cash' | 'card', value: number }[] = [
           v-else
         >
           <li
-            v-for="({ label, typeIcon, value }, index) in  options"
-            :key="index"
+            v-for="({ id, paidMethod, amount, label }) in  usePayment.paymentList"
+            :key="id"
             class="border border-black/30 rounded-2xl shadow-lg shadow-black/20 px-5 py-3 bg-white text-sm font-semibold flex items-center gap-2 justify-between"
           >
             <div class="flex items-center gap-3">
               <span>
                 <svg
-                  v-if="typeIcon === 'card'"
+                  v-if="paidMethod === 'card'"
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
                   fill="none"
@@ -158,8 +41,8 @@ const options: { label: string, typeIcon: 'cash' | 'card', value: number }[] = [
                   stroke-width="2"
                   stroke-linecap="round"
                   class="size-5"
-                >
                   stroke-linejoin="round"
+                >
                   <rect
                     width="20"
                     height="14"
@@ -195,12 +78,15 @@ const options: { label: string, typeIcon: 'cash' | 'card', value: number }[] = [
                   <path d="m16.71 13.88.7.71-2.82 2.82" />
                 </svg>
               </span>
-              <span class="font-semibold">{{ label }}</span>
+              <span class="font-semibold">{{  label }}</span>
             </div>
             <div class="flex items-center gap-5">
-              <span class="font-bold text-lg">${{ value }}</span>
+              <span class="font-bold text-lg"
+                >${{ getFormattedNumber(amount) }}</span
+              >
               <button
                 class=" hover:text-white transition-all hover:bg-rose-500 p-1 rounded-full duration-200 active:bg-rose-600"
+                @click="usePayment.removePaymentFromList(id)"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"

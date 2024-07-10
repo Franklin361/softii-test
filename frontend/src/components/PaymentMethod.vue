@@ -1,15 +1,22 @@
 <script setup lang="ts">
+import { cn } from '../lib/utils';
+import { usePaymentStore } from '../store/payment';
 
-const options: { label: string, typeIcon: 'cash' | 'card' }[] = [
+const usePayment = usePaymentStore()
+
+const options: { id:string, label: string, typeIcon: 'cash' | 'card' }[] = [
   {
+    id:crypto.randomUUID(),
     label: 'Efectivo',
     typeIcon: 'cash'
   },
   {
+    id:crypto.randomUUID(),
     label: 'BBVA 1234',
     typeIcon: 'card'
   },
   {
+    id:crypto.randomUUID(),
     label: 'Santander 1234',
     typeIcon: 'card'
   },
@@ -39,10 +46,14 @@ const options: { label: string, typeIcon: 'cash' | 'card' }[] = [
       <h4 class="text-lg font-bold leading-tight ">Elige el método de pago</h4>
     </div>
     <div class="grid grid-cols-2 gap-3 mt-7">
-      <div
-        v-for="({ label, typeIcon },index) in options"
-        :key="index"
-        class="border border-black/30 rounded-2xl flex justify-center items-center flex-col gap-3 shadow-lg shadow-black/20 p-4 hover:bg-primary/90 hover:text-white cursor-pointer active:bg-primary transition-all duration-200 bg-white"
+      <button
+        v-for="({ label, typeIcon, id }) in options"
+        :key="id"
+        :class="cn(
+          'border border-black/30 rounded-2xl flex justify-center items-center flex-col gap-3 shadow-lg shadow-black/20 p-4 hover:bg-primary/90 hover:text-white cursor-pointer active:bg-primary transition-all duration-200 bg-white',
+          usePayment.payMethodSelected?.id === id && 'text-white bg-primary pointer-events-none'
+        )"
+        @click="usePayment.setPayMethod({ label, method: typeIcon, id })"
       >
         <span>
           <svg
@@ -92,7 +103,7 @@ const options: { label: string, typeIcon: 'cash' | 'card' }[] = [
           </svg>
         </span>
         <span class="capitalize font-semibold">{{label}}</span>
-      </div>
+      </button>
     </div>
   </div>
 </template>
