@@ -31,7 +31,7 @@ const handleAddNewPayment = () => {
 <template>
   <footer>
     <div
-      class="flex justify-between items-center gap-20 p-5 text-2xl max-w-6xl mx-auto pb-16"
+      class="flex justify-between items-center lg:gap-20 gap-10 p-5 text-2xl max-w-6xl mx-auto pb-16 lg:flex-row flex-col"
     >
       <div class="flex-1 space-y-2">
         <div
@@ -49,7 +49,7 @@ const handleAddNewPayment = () => {
       </div>
       <button
         :class="cn(
-          'flex-1 rounded-full p-4 font-semibold select-none',
+          'flex-1 rounded-full p-4 font-semibold select-none lg:w-auto w-full',
           (usePayment.totalPeople > 0 && usePayment.totalTip > 0 && usePayment.payMethodSelected) ? 'bg-primary opacity-100 text-white border-transparent pointer-events-auto  active:bg-primary/90 transition-all duration-200 outline outline-2 outline-offset-4 outline-transparent hover:outline-primary': 'border border-black opacity-50 pointer-events-none'
         )"
         @click="handleAddNewPayment"

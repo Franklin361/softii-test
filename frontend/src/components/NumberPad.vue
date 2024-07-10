@@ -66,7 +66,7 @@ const handleAccept = () => {
         useUi.isNumPadActive && 'border-primary bg-primary/5'
       )"
     >
-      <div class="px-12 pt-5">
+      <div class="lg:px-12 md:px-8 px-6 pt-5">
         <header class="relative text-2xl ">
           <span
             :class="cn(

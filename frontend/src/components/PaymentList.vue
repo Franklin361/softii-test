@@ -8,8 +8,8 @@ const usePayment = usePaymentStore()
 </script>
 
 <template>
-  <section>
-    <div class="overflow-y-auto h-[450px] scroll-custom pb-5">
+  <section class="lg:col-span-1 md:col-span-2 col-span-1">
+    <div class="overflow-y-auto lg:h-[450px] h-auto  scroll-custom pb-5">
       <span class="sticky pb-5 pt-0 top-0 bg-background block w-full"
         >Pagos</span
       >
