@@ -3,8 +3,26 @@
 
 import { usePaymentStore } from '../store/payment';
 import { getFormattedNumber } from '../lib/utils';
+import { deletePaymentById } from '../service/payment';
+import { ref } from 'vue';
 
 const usePayment = usePaymentStore()
+
+const deleting = ref(-1)
+
+const deletePayment =  async( id:number ) => {
+  deleting.value = id
+
+  const isDeleted = await deletePaymentById(id)
+
+  deleting.value = -1
+
+  if(!isDeleted){
+    alert('Hubo un error, intente más tarde')
+    return
+  }
+  usePayment.removePaymentFromList(id)
+}
 </script>
 
 <template>
@@ -26,14 +44,14 @@ const usePayment = usePaymentStore()
           v-else
         >
           <li
-            v-for="({ id, paidMethod, amount, label }) in  usePayment.paymentList"
+            v-for="({ id, paymentMethod, amount, label }) in  usePayment.paymentList"
             :key="id"
             class="border border-black/30 rounded-2xl shadow-lg shadow-black/20 px-5 py-3 bg-white text-sm font-semibold flex items-center gap-2 justify-between"
           >
             <div class="flex items-center gap-3">
               <span>
                 <svg
-                  v-if="paidMethod === 'card'"
+                  v-if="paymentMethod === 'card'"
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
                   fill="none"
@@ -85,9 +103,15 @@ const usePayment = usePaymentStore()
                 >${{ getFormattedNumber(amount) }}</span
               >
               <button
-                class=" hover:text-white transition-all hover:bg-rose-500 p-1 rounded-full duration-200 active:bg-rose-600"
-                @click="usePayment.removePaymentFromList(id)"
+                class=" hover:text-white transition-all hover:bg-rose-500 p-1 rounded-full duration-200 active:bg-rose-600 relative disabled:pointer-events-none"
+                @click="deletePayment(id)"
+                :disabled="deleting > -1"
               >
+                <span
+                  v-show="deleting === id"
+                  class="absolute -top-7 -right-5 text-xs bg-rose-500 text-white p-1 px-2 rounded-full animate-pulse"
+                  >Deleting</span
+                >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"

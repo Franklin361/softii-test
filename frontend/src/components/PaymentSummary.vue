@@ -1,10 +1,14 @@
 <script setup lang="ts">
+import { ref } from 'vue';
 import { cn, getFormattedNumber } from '../lib/utils';
+import { createNewPayment } from '../service/payment';
 import { usePaymentStore } from '../store/payment';
 
 const usePayment = usePaymentStore()
 
-const handleAddNewPayment = () => {
+const loading = ref(false)
+
+const handleAddNewPayment = async() => {
   if(!usePayment.payMethodSelected) {
     alert('Selecciona un método de pago Primero')
     return
@@ -15,16 +19,26 @@ const handleAddNewPayment = () => {
     return
   }
 
-  usePayment.addNewPaymentToList({
-    id: crypto.randomUUID(),
+  loading.value = true
+
+  const data = await createNewPayment({
     amount: usePayment.totalTip / usePayment.totalPeople,
-    paidMethod: usePayment.payMethodSelected?.method,
-    label: usePayment.payMethodSelected?.label
+    label: usePayment.payMethodSelected.label,
+    paymentMethod: usePayment.payMethodSelected.method
   })
 
+  loading.value = false
+
+  if(!data){
+    alert('Hubo un error, intente más tarde')
+    return
+  }
+
+  console.log(data)
+
+  usePayment.addNewPaymentToList(data)
   usePayment.setTotalPeople(0)
   usePayment.setPayMethod(null)
-
 }
 </script>
 
@@ -53,8 +67,13 @@ const handleAddNewPayment = () => {
           (usePayment.totalPeople > 0 && usePayment.totalTip > 0 && usePayment.payMethodSelected) ? 'bg-primary opacity-100 text-white border-transparent pointer-events-auto  active:bg-primary/90 transition-all duration-200 outline outline-2 outline-offset-4 outline-transparent hover:outline-primary': 'border border-black opacity-50 pointer-events-none'
         )"
         @click="handleAddNewPayment"
+        :disabled="loading"
       >
-        {{   usePayment.totalPeople > 0 && usePayment.totalTip > 0 ? `Pagar $${usePayment.getAmountTotalPerPerson} en propinas` : 'Pagar propinas'  }}
+        <span v-if="loading"> Pagando... </span>
+        <span
+          v-else
+          >{{ usePayment.totalPeople > 0 && usePayment.totalTip > 0 ? `Pagar $${usePayment.getAmountTotalPerPerson} en propinas` : 'Pagar propinas'  }}</span
+        >
       </button>
     </div>
   </footer>

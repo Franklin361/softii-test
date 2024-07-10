@@ -3,7 +3,7 @@
 <template>
   <nav class="border-b border-black ">
     <div
-      class="max-w-6xl mx-auto flex lg:justify-between justify-center px-5 py-4 items-center flex-wrap lg:gap-0 gap-2"
+      class="max-w-6xl mx-auto flex sm:justify-between justify-center px-5 py-4 items-center flex-wrap lg:gap-0 gap-2"
     >
       <div class="flex lg:gap-5 gap-2 items-center lg:flex-row flex-col">
         <a

@@ -3,8 +3,8 @@ import { computed, ref } from 'vue';
 import { getFormattedNumber } from '../lib/utils';
 
 interface PaymentItem {
-  id: string;
-  paidMethod: 'cash' | 'card';
+  id: number;
+  paymentMethod: string;
   label: string;
   amount: number;
 }
@@ -12,7 +12,7 @@ interface PaymentItem {
 interface PayMethod {
   id: string;
   label: string;
-  method: 'cash' | 'card';
+  method: string;
 }
 
 export const usePaymentStore = defineStore('payment', () => {
