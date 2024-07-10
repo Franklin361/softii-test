@@ -5,13 +5,9 @@ import PaymentMethod from './PaymentMethod.vue'
 </script>
 
 <template>
-  <section class="">
-    <!--  -->
+  <section>
     <TotalTipAmount />
-    <!--  -->
     <TipPerPerson />
-    <!--  -->
     <PaymentMethod />
-    <!--  -->
   </section>
 </template>

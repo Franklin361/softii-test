@@ -7,7 +7,7 @@
     <div class="flex gap-5 items-center">
       <a
         href="#"
-        class="flex gap-1 items-center"
+        class="flex gap-1 items-center text-primary hover:underline"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -17,7 +17,7 @@
           stroke-width="2"
           stroke-linecap="round"
           stroke-linejoin="round"
-          class="size-5"
+          class="size-7"
         >
           <path d="m15 18-6-6 6-6" />
         </svg>
@@ -26,9 +26,9 @@
       <h1 class="text-2xl font-bold">Pago de Propinas</h1>
     </div>
 
-    <div class="flex flex-col gap-1 items-end">
+    <div class="flex flex-col gap-1 items-end text-primary">
       <span class="text-sm leading-none">Efectivo en caja</span>
-      <span class="p-2 text-3xl font-semibold bg-black/10 rounded-md"
+      <span class="p-2 text-3xl font-semibold  rounded-md bg-primary/20 "
         >$5,500.00</span
       >
     </div>

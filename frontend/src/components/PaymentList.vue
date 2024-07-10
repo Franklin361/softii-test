@@ -5,13 +5,128 @@ const options: { label: string, typeIcon: 'cash' | 'card', value: number }[] = [
     label: 'Efectivo',
     typeIcon: 'cash',
     value: 100
-  }
+  },
+  {
+    label: 'Efectivo',
+    typeIcon: 'cash',
+    value: 100
+  },
+  {
+    label: 'Efectivo',
+    typeIcon: 'cash',
+    value: 100
+  },
+  {
+    label: 'Efectivo',
+    typeIcon: 'cash',
+    value: 100
+  },
+  {
+    label: 'Efectivo',
+    typeIcon: 'cash',
+    value: 100
+  },
+  {
+    label: 'Efectivo',
+    typeIcon: 'cash',
+    value: 100
+  },
+  {
+    label: 'Efectivo',
+    typeIcon: 'cash',
+    value: 100
+  },
+  {
+    label: 'Efectivo',
+    typeIcon: 'cash',
+    value: 100
+  },
+  {
+    label: 'Efectivo',
+    typeIcon: 'cash',
+    value: 100
+  },
+  {
+    label: 'Efectivo',
+    typeIcon: 'cash',
+    value: 100
+  },
+  {
+    label: 'Efectivo',
+    typeIcon: 'cash',
+    value: 100
+  },
+  {
+    label: 'Efectivo',
+    typeIcon: 'cash',
+    value: 100
+  },
+  {
+    label: 'Efectivo',
+    typeIcon: 'cash',
+    value: 100
+  },
+  {
+    label: 'Efectivo',
+    typeIcon: 'cash',
+    value: 100
+  },
+  {
+    label: 'Efectivo',
+    typeIcon: 'cash',
+    value: 100
+  },
+  {
+    label: 'Efectivo',
+    typeIcon: 'cash',
+    value: 100
+  },
+  {
+    label: 'Efectivo',
+    typeIcon: 'cash',
+    value: 100
+  },
+  {
+    label: 'Efectivo',
+    typeIcon: 'cash',
+    value: 100
+  },
+  {
+    label: 'Efectivo',
+    typeIcon: 'cash',
+    value: 100
+  },
+  {
+    label: 'Efectivo',
+    typeIcon: 'cash',
+    value: 100
+  },
+  {
+    label: 'Efectivo',
+    typeIcon: 'cash',
+    value: 100
+  },
+  {
+    label: 'Efectivo',
+    typeIcon: 'cash',
+    value: 100
+  },
+  {
+    label: 'Efectivo',
+    typeIcon: 'cash',
+    value: 100
+  },
+  {
+    label: 'Efectivo',
+    typeIcon: 'cash',
+    value: 100
+  },
 ]
 </script>
 
 <template>
   <section>
-    <div class="overflow-y-auto h-[450px]">
+    <div class="overflow-y-auto h-[450px] scroll-custom pb-5">
       <span class="sticky pb-5 pt-0 top-0 bg-background block w-full"
         >Pagos</span
       >
@@ -108,3 +223,21 @@ const options: { label: string, typeIcon: 'cash' | 'card', value: number }[] = [
     </div>
   </section>
 </template>
+
+<style>
+
+.scroll-custom::-webkit-scrollbar,
+.custom-scroll::-webkit-scrollbar {
+  @apply bg-transparent w-[10px];
+}
+
+.scroll-custom::-webkit-scrollbar-track,
+.custom-scroll::-webkit-scrollbar-track {
+  @apply bg-transparent;
+}
+
+.scroll-custom::-webkit-scrollbar-thumb,
+.custom-scroll::-webkit-scrollbar-thumb {
+  @apply bg-primary rounded-2xl;
+}
+</style>

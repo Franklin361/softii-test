@@ -10,7 +10,7 @@ import TipPaymentOptions from './components/TipPaymentOptions.vue'
   <div class="">
     <NavBar />
     <main class="p-5 my-5 ">
-      <div class="grid grid-cols-3 gap-10  max-w-6xl mx-auto">
+      <div class="grid grid-cols-3 gap-10 max-w-6xl mx-auto">
         <TipPaymentOptions />
         <NumberPad />
         <PaymentList />
