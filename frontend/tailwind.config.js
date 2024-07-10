@@ -7,7 +7,8 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: 'hsl(var(--primary))'
+        primary: 'hsl(var(--primary))',
+        background: 'hsl(var(--background))'
       }
     },
   },
